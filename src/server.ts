@@ -3,8 +3,9 @@ import "dotenv/config";
 import path from "path";
 import { connectDb } from "./config/db.config";
 import userRoutes from "./route/user.route";
-import imageUpload from "./route/upload.route";
 import categoryRoutes from "./route/category.route";
+import swaggerUi from "swagger-ui-express";
+import { swaggerSpec } from "./config/swagger";
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -28,7 +29,9 @@ connectDb();
 // Routes
 app.use("/api", userRoutes);
 app.use("/api", categoryRoutes);
-app.use("/api/upload", imageUpload);
+
+//Swagger Docs
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 // Test route
 app.get("/", (req, res) => {
@@ -38,4 +41,7 @@ app.get("/", (req, res) => {
 // Start server
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
+  console.log(
+    `API documentation available at http://localhost:${port}/api-docs`
+  );
 });
