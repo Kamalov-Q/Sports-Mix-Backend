@@ -6,7 +6,7 @@ import userRoutes from "./route/user.route";
 import categoryRoutes from "./route/category.route";
 import swaggerUi from "swagger-ui-express";
 import { swaggerSpec } from "./config/swagger";
-
+ 
 const app = express();
 const port = process.env.PORT || 3000;
 
